@@ -1,5 +1,4 @@
-package com.aglpro.models;
-
+package com.aglpro.ecommerce.models;
 public class Paiement {
 
     private int id;
