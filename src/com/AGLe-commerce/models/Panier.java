@@ -1,4 +1,4 @@
-package com.aglpro.models;
+package com.aglpro.ecommerce.models;;
 
 import java.util.ArrayList;
 import java.util.List;
