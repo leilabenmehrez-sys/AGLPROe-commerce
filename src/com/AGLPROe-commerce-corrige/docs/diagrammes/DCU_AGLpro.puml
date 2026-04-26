@@ -1,0 +1,57 @@
+@startuml DCU_soukonline
+left to right direction
+
+actor "Visiteur" as Visiteur
+actor "Client" as Client
+actor "Administrateur" as Admin
+actor "Vendeur" as Vendeur
+actor "Livreur" as Livreur
+
+Visiteur <|-- Client
+
+rectangle "soukonline - Site e-commerce tunisien" {
+  usecase "Consulter le catalogue" as UC1
+  usecase "Rechercher un produit" as UC2
+  usecase "Créer un compte" as UC3
+  usecase "Se connecter" as UC4
+  usecase "Ajouter un produit au panier" as UC5
+  usecase "Modifier le panier" as UC6
+  usecase "Valider la commande" as UC7
+  usecase "Payer la commande" as UC8
+  usecase "Suivre la livraison" as UC9
+  usecase "Donner un avis" as UC10
+  usecase "Gérer les produits" as UC11
+  usecase "Gérer les commandes" as UC12
+  usecase "Préparer la livraison" as UC13
+  usecase "Vérifier le stock" as UC14
+  usecase "Envoyer une notification" as UC15
+}
+
+Visiteur --> UC1
+Visiteur --> UC2
+Visiteur --> UC3
+Visiteur --> UC4
+
+Client --> UC5
+Client --> UC6
+Client --> UC7
+Client --> UC8
+Client --> UC9
+Client --> UC10
+
+Vendeur --> UC11
+Vendeur --> UC12
+Vendeur --> UC13
+
+Admin --> UC11
+Admin --> UC12
+
+Livreur --> UC9
+Livreur --> UC13
+
+UC7 ..> UC14 : <<include>>
+UC7 ..> UC15 : <<include>>
+UC8 ..> UC15 : <<include>>
+UC10 ..> UC9 : <<extend>>
+
+@enduml
