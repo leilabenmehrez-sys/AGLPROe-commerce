@@ -1,0 +1,66 @@
+@startuml DS_Commande_soukonline
+
+actor Client
+participant "Interface soukonline" as UI
+participant "Panier" as Panier
+participant "Produit" as Produit
+participant "Commande" as Commande
+participant "Paiement" as Paiement
+participant "Livraison" as Livraison
+participant "Notification" as Notification
+participant "Vendeur" as Vendeur
+participant "Livreur" as Livreur
+
+Client -> UI : rechercherProduit("sac artisanal")
+UI -> Produit : chercherProduit(motCle)
+Produit --> UI : listeProduits
+
+Client -> UI : selectionnerProduit()
+UI -> Panier : ajouterProduit(produit, quantite)
+
+Panier -> Produit : estDisponible(quantite)
+Produit --> Panier : true / false
+
+alt Produit disponible
+  Panier --> UI : produit ajouté au panier
+
+  Client -> UI : validerPanier()
+  UI -> Panier : calculerTotal()
+  Panier --> UI : total
+
+  Client -> UI : confirmerCommande()
+  UI -> Commande : validerCommande()
+  Commande -> Produit : diminuerStock(quantite)
+  Produit --> Commande : stock mis à jour
+
+  Commande -> Paiement : effectuerPaiement()
+  
+  alt Paiement accepté
+    Paiement --> Commande : paiement confirmé
+    Commande -> Vendeur : notifierNouvelleCommande()
+    Vendeur --> Commande : commande préparée
+
+    Commande -> Livraison : créerLivraison()
+    Livraison -> Livreur : affecterLivreur()
+    Livreur --> Livraison : livreur affecté
+
+    Commande -> Notification : envoyerConfirmation()
+    Notification --> Client : commande confirmée
+
+    opt Stock faible
+      Produit -> Vendeur : alerterStockFaible()
+    end
+
+    UI --> Client : afficherConfirmationCommande()
+
+  else Paiement refusé
+    Paiement --> Commande : paiement refusé
+    UI --> Client : afficherErreurPaiement()
+  end
+
+else Produit indisponible
+  Panier --> UI : stock insuffisant
+  UI --> Client : afficherErreurStock()
+end
+
+@enduml

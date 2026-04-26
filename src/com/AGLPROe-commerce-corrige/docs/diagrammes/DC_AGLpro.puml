@@ -1,0 +1,99 @@
+skinparam classBackgroundColor White
+skinparam classBorderColor Gray
+skinparam classArrowColor Black
+skinparam classFontSize 12
+skinparam classFontName Arial
+
+' LÉGENDE
+legend top right
+|= Couleur |= Membre |= Rôle |
+|<#AED6F1> Bleu | Leila | Product Owner + Dev |
+|<#A9DFBF> Vert | Ghofrane | Développeuse |
+|<#F9E79F> Jaune | Lina | Développeuse |
+|<#FAD7A0> Orange | Hamza | Scrum Master + Dev |
+|<#F1948A> Rouge | Abdelkader | Développeur |
+endlegend
+
+' ==================== LEILA (BLEU) ====================
+' Utilisateur, Client, Administrateur
+
+class Utilisateur #AED6F1 {
+    -id : int
+    -nom : String
+    -email : String
+    -motDePasse : String
+    +Utilisateur()
+    +Utilisateur(id:int, nom:String, email:String, motDePasse:String)
+    +seConnecter(email:String, mdp:String) : boolean
+    +seDeconnecter() : void
+}
+
+class Client #AED6F1 {
+    -adresse : String
+    -telephone : String
+    +Client()
+    +consulterCatalogue() : void
+    +ajouterAuPanier(produit:Produit, quantite:int) : void
+    +passerCommande() : Commande
+}
+
+class Administrateur #AED6F1 {
+    +Administrateur()
+    +gererUtilisateur(utilisateur:Utilisateur) : void
+    +consulterStatistiques() : void
+}
+
+' ==================== GHOFRANE (VERT) ====================
+' Produit, Avis
+
+class Produit #A9DFBF {
+    -id : int
+    -nom : String
+    -description : String
+    -prix : double
+    -stock : int
+    +Produit()
+    +estDisponible(qte:int) : boolean
+    +diminuerStock(qte:int) : void
+}
+
+class Avis #A9DFBF {
+    -note : int
+    -commentaire : String
+    +Avis()
+    +publierAvis() : void
+}
+
+' ==================== LINA (JAUNE) ====================
+' Panier, LignePanier, Commande
+
+class Panier #F9E79F {
+    -id : int
+    +Panier()
+    +ajouterProduit(produit:Produit, qte:int) : void
+    +retirerProduit(produit:Produit) : void
+    +calculerTotal() : double
+}
+
+class LignePanier #F9E79F {
+    -quantite : int
+    +LignePanier()
+    +calculerSousTotal() : double
+}
+
+class Commande #F9E79F {
+    -id : int
+    -dateCommande : String
+    -statut : String
+    -total : double
+    +Commande()
+    +validerCommande() : boolean
+    +annulerCommande() : void
+}
+
+' ==================== HAMZA (ORANGE) ====================
+' Paiement, Notification
+
+class Paiement #FAD7A0 {
+    -id : int}
+... (68lignes restantes)
