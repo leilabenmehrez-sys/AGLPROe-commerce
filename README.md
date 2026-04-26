@@ -1,7 +1,7 @@
-# AGLPROe-commerce
+# ecomerce souk online
 
 ## Description
-AGLPROe-commerce est une plateforme e-commerce développée 
+ ecomerce souk online est une plateforme e-commerce développée 
 en Java selon la méthode Agile Scrum. Elle permet aux 
 commerçants tunisiens de créer leur boutique en ligne en 
 quelques minutes, sans compétences techniques.
